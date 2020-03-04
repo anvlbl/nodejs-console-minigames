@@ -8,12 +8,11 @@ console.log(guessNumber);
 
 while (true) {
 
-const query = readLine.question("test message: ");
+const query = readLine.question("input your number: ");
   if (+query === guessNumber) {
-    console.log("you win! number whats i guess is really " + guessNumber);
+    console.log("you win! number what i guess is really " + guessNumber);
     break;
   }
-
 console.log(`return your ${query}`);
 
-}
+};
