@@ -1,0 +1,27 @@
+{
+  "name": "mindgames_console",
+  "version": "1.0.0",
+  "description": "simplest little game-project for newbies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dervishBK/mindgames_console.git"
+  },
+  "keywords": [
+    "pet-project",
+    "learning",
+    "js-basics"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dervishBK/mindgames_console/issues"
+  },
+  "homepage": "https://github.com/dervishBK/mindgames_console#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
