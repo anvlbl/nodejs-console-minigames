@@ -4,10 +4,15 @@ const guessNumber = Math.floor(Math.random() * 1000) + Math.floor(Math.random() 
 const length = String(guessNumber).length;
 
 console.log(`My guessed number contains ${length} digits`);
-//console.log(guessNumber);
+console.log(guessNumber);
 
 while (true) {
+
 const query = readLine.question("test message: ");
+  if (+query === guessNumber) {
+    console.log("you win! number whats i guess is really " + guessNumber);
+    break;
+  }
 
 console.log(`return your ${query}`);
 
