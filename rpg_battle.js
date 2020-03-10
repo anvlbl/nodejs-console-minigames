@@ -1,6 +1,6 @@
 const monster = {
-    maxHealth: 10,
-	currentHealth: 10,
+    maxHealth: 20,
+	currentHealth: 20,
     name: "Лютый",
     moves: [
         {
@@ -86,31 +86,33 @@ const hit = obj => {
 		// check the everything values of damage below
 		// at first physical damage
 		for (let i = 0; i < arr.length; i++) {
-			if ((arr[i].physicalDmg > dmg) && (arr[i].currentCooldown === 0)) {				
+			if ((arr[i].physicalDmg > dmg) && (arr[i].currentCooldown === 0)) {	
+				dmg = arr[i].physicalDmg;
 				index = i;
 			}
 		}
 		//and magic damage
 		for (let i = 0; i < arr.length; i++) {
-			if ((arr[i].magicDmg > dmg) && (arr[i].currentCooldown === 0)) {				
+			if ((arr[i].magicDmg > dmg) && (arr[i].currentCooldown === 0)) {	
+				dmg = arr[i].magicDmg;			
 				index = i;
 			}
 		}
-		return arr[index];
+		//console.dir(arr[index]);
+		console.log(`you are take the ${dmg} damage!`);
+		return dmg;
 	}	
-	console.dir(choiseMaxDmg(obj.moves));
+	return choiseMaxDmg(obj.moves);	
 };
 
-hit(character);
-//while (true) {
-//	if (monster.currentHealth <= 0) {
-//		console.log('you won!');
-//		break;
-//	}
-//	
-//	console.dir(monster.currentHealth);
-//	monster.currentHealth =- hit(character);
-//};
+while (true) {
+	if (monster.currentHealth <= 0) {
+		console.log('you won!');
+		break;
+	}	
+	console.log('current health of enemy ' + monster.currentHealth);
+	monster.currentHealth = monster.currentHealth - hit(character);
+};
 
 
 
