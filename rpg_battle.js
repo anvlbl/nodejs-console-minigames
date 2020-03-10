@@ -80,8 +80,8 @@ const character = {
 
 
 const hit = obj => {	
-	//choose the hit with max damage (physical or magic)
-	const changeMaxDmg = arr => {
+	//choose the move with max damage (physical or magic)
+	const choiseMaxDmg = arr => {
 		let dmg = 0, index = 0;
 		// check the everything values of damage below
 		// at first physical damage
@@ -98,7 +98,50 @@ const hit = obj => {
 		}
 		return arr[index];
 	}	
-	console.dir(changeMaxDmg(obj.moves));
+	console.dir(choiseMaxDmg(obj.moves));
 };
 
 hit(character);
+//while (true) {
+//	if (monster.currentHealth <= 0) {
+//		console.log('you won!');
+//		break;
+//	}
+//	
+//	console.dir(monster.currentHealth);
+//	monster.currentHealth =- hit(character);
+//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
