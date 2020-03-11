@@ -6,6 +6,7 @@ const monster = {
     name: "Лютый",
     moves: [
         {
+			"id": 1,
             "name": "Удар когтистой лапой",
             "physicalDmg": 3, 
             "magicDmg": 0,    
@@ -15,6 +16,7 @@ const monster = {
 			"currentCooldown": 0,
         },
         {
+			"id": 2,
             "name": "Огненное дыхание",
             "physicalDmg": 0,
             "magicDmg": 4,
@@ -24,6 +26,7 @@ const monster = {
 			"currentCooldown": 0,
         },
         {
+			"id": 3,
             "name": "Удар хвостом",
             "physicalDmg": 2,
             "magicDmg": 0,
@@ -41,6 +44,7 @@ const character = {
 	name: "Евстафий",
 	moves: [
     {
+		"id": 1,
         "name": "Удар боевым кадилом",
         "physicalDmg": 2,
         "magicDmg": 0,
@@ -50,6 +54,7 @@ const character = {
 		"currentCooldown": 0,
     },
     {
+		"id": 2,
         "name": "Вертушка левой пяткой",
         "physicalDmg": 4,
         "magicDmg": 0,
@@ -59,6 +64,7 @@ const character = {
 		"currentCooldown": 0,
     },
     {
+		"id": 3,
         "name": "Каноничный фаербол",
         "physicalDmg": 0,
         "magicDmg": 5,
@@ -68,6 +74,7 @@ const character = {
 		"currentCooldown": 0,
     },
     {
+		"id": 4,
         "name": "Магический блок",
         "physicalDmg": 0,
         "magicDmg": 0,
@@ -85,7 +92,7 @@ const hit = obj => {
 	//choose the move with max damage (physical or magic)
 	const choiseMaxDmg = arr => {
 		const len = arr.length;
-		let dmg = 0, index = 0;
+		let dmg = 0, index = 0; typeOfDamage = "";
 		// check the everything values of damage and cooldown below
 		for (let i = 0; i < len; i++) {
 			if ((arr[i].physicalDmg > dmg) && (arr[i].currentCooldown > 0)){ 
@@ -94,6 +101,7 @@ const hit = obj => {
 			if ((arr[i].physicalDmg > dmg) && (arr[i].currentCooldown === 0)) {	
 				dmg = arr[i].physicalDmg;
 				index = i;
+				typeOfDamage = "physical";
 			}
 		}
 		for (let i = 0; i < len; i++) {
@@ -103,6 +111,7 @@ const hit = obj => {
 			if ((arr[i].magicDmg > dmg) && (arr[i].currentCooldown === 0)) {	
 				dmg = arr[i].magicDmg;			
 				index = i;
+				typeOfDamage = "magic";
 			}
 		}		
 		arr[index].currentCooldown = arr[index].cooldown;
@@ -118,7 +127,9 @@ while (true) {
 		console.log('you won!');
 		break;
 	}	
-	console.log('current health of enemy ' + monster.currentHealth);
+	console.log('current health of enemy ' + monster.currentHealth);	
+	console.table(character.moves);
+	const query = readline.question(`Удар?`);
 	monster.currentHealth -= hit(character);
 };
 
