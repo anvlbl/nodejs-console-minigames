@@ -17,3 +17,5 @@ Fantasy-style text game in console.
 
 Actually includes only the batlle between your character and monster. You have a set of actions that you can use against the computer.
 Computer has set moves too, but also has very primitive logic. Kill the monster and don't let yourself be killed. It is possible to change the difficulty. 
+
+in proccess
