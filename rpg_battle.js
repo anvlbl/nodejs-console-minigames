@@ -1,6 +1,8 @@
+const readline = require('readline-sync');
+
 const monster = {
-    maxHealth: 20,
-	currentHealth: 20,
+    maxHealth: 30,
+	currentHealth: 30,
     name: "Лютый",
     moves: [
         {
@@ -82,23 +84,29 @@ const character = {
 const hit = obj => {	
 	//choose the move with max damage (physical or magic)
 	const choiseMaxDmg = arr => {
+		const len = arr.length;
 		let dmg = 0, index = 0;
-		// check the everything values of damage below
-		// at first physical damage
-		for (let i = 0; i < arr.length; i++) {
+		// check the everything values of damage and cooldown below
+		for (let i = 0; i < len; i++) {
+			if ((arr[i].physicalDmg > dmg) && (arr[i].currentCooldown > 0)){ 
+				arr[i].currentCooldown -= 1;
+			}
 			if ((arr[i].physicalDmg > dmg) && (arr[i].currentCooldown === 0)) {	
 				dmg = arr[i].physicalDmg;
 				index = i;
 			}
 		}
-		//and magic damage
-		for (let i = 0; i < arr.length; i++) {
+		for (let i = 0; i < len; i++) {
+			if ((arr[i].magicDmg > dmg) && (arr[i].currentCooldown > 0)){
+				arr[i].currentCooldown -= 1;
+			}
 			if ((arr[i].magicDmg > dmg) && (arr[i].currentCooldown === 0)) {	
 				dmg = arr[i].magicDmg;			
 				index = i;
 			}
-		}
-		//console.dir(arr[index]);
+		}		
+		arr[index].currentCooldown = arr[index].cooldown;
+				
 		console.log(`you are take the ${dmg} damage!`);
 		return dmg;
 	}	
@@ -111,7 +119,7 @@ while (true) {
 		break;
 	}	
 	console.log('current health of enemy ' + monster.currentHealth);
-	monster.currentHealth = monster.currentHealth - hit(character);
+	monster.currentHealth -= hit(character);
 };
 
 
