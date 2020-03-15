@@ -5,8 +5,7 @@ const monster = {
 	currentHealth: 30,
     name: "Лютый",
     moves: [
-    {   "id": "1",
-        "name": "Удар когтистой лапой",
+    {   "name": "Удар когтистой лапой",
         "physicalDmg": 3, 
         "magicDmg": 0,    
         "physicArmorPercent": 20, 
@@ -14,8 +13,7 @@ const monster = {
         "CD": 0,        // cooldown
         "currCD": 0,    // current cooldown
     },
-    {   "id": "2",
-        "name": "Огненное дыхание",
+    {   "name": "Огненное дыхание",
         "physicalDmg": 0,
         "magicDmg": 4,
         "physicArmorPercent": 0,
@@ -23,8 +21,7 @@ const monster = {
         "CD": 3,
         "currCD": 0,
     },
-    {   "id": "3",
-        "name": "Удар хвостом",
+    {   "name": "Удар хвостом",
         "physicalDmg": 2,
         "magicDmg": 0,
         "physicArmorPercent": 50,
@@ -40,8 +37,7 @@ const character = {
 	currentHealth: 30,
 	name: "Евстафий",
 	moves: [
-    {   "id": "1",
-        "name": "Удар боевым кадилом",
+    {   "name": "Удар боевым кадилом",
         "physicalDmg": 2,
         "magicDmg": 0,
         "physicArmorPercent": 0,
@@ -49,8 +45,7 @@ const character = {
         "CD": 0,
         "currCD": 0,
     },
-    {   "id": "2",
-        "name": "Вертушка левой пяткой",
+    {   "name": "Вертушка левой пяткой",
         "physicalDmg": 4,
         "magicDmg": 0,
         "physicArmorPercent": 0,
@@ -58,8 +53,7 @@ const character = {
         "CD": 4,
         "currCD": 0,
     },
-    {   "id": "3",
-        "name": "Каноничный фаербол",
+    {   "name": "Каноничный фаербол",
         "physicalDmg": 0,
         "magicDmg": 5,
         "physicArmorPercent": 0,
@@ -67,8 +61,7 @@ const character = {
         "CD": 3,
         "currCD": 0,
     },
-    {   "id": "4",
-        "name": "Магический блок",
+    {   "name": "Магический блок",
         "physicalDmg": 0,
         "magicDmg": 0,
         "physicArmorPercent": 100,
@@ -80,6 +73,7 @@ const character = {
 };
 
 //function describes monster actions logic
+//return the object (one of the action list with max damage and zero coooldown)
 const hit = obj => {	
 	//choose the move with max damage (physical or magic)
 	const action = arr => {
@@ -106,7 +100,7 @@ const hit = obj => {
 		arr[index].currCD = arr[index].CD;		
 		return arr[index];        
 	}	
-	return action(obj.moves);	//return the object (one of the action list)
+	return action(obj.moves);	
 };
 
 //function below calculates the applied damage
@@ -115,6 +109,7 @@ const diff = (minuend, subtrahend) => {
     const magDmg = subtrahend.magicDmg - (minuend.magicArmorPercent / 100 * subtrahend.magicDmg);
     return physDmg + magDmg;
 };
+
 
 while (true) {
 	if (monster.currentHealth <= 0) {
@@ -126,13 +121,18 @@ while (true) {
         break;
     }
     // show current health of opponents
-    console.log(`enemy's health: ${monster.currentHealth}`);
-    console.log(`your health: ${character.currentHealth}`);
+    console.log(`health of ${monster.name}: ${monster.currentHealth}`);
+    console.log(`health of ${character.name}: ${character.currentHealth}`);
 
+    //input accept the index of obj.moves
+    const playerAction = readline.question('what do we do?')
+
+    //calculate the damage of opponents
     const mdm = hit(monster);
     const cdm = hit(character);
-    console.log(`${monster.name} applies the ${mdm.name}`);
-    console.log(`${character.name} applies the ${cdm.name}`);
+
+    console.log(`${monster.name} applies the ${mdm.name} and apply ${mdm.physicalDmg + mdm.magicDmg} damage`);
+    console.log(`${character.name} applies the ${cdm.name} and apply ${cdm.physicalDmg + cdm.magicDmg} damage`);
 
     monster.currentHealth -= diff(mdm, cdm);
     character.currentHealth -=diff(cdm, mdm);
