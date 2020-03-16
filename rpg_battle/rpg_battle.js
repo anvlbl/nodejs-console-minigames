@@ -1,3 +1,4 @@
+"use strict"
 const readline = require('readline-sync');
 
 const monster = {
@@ -74,9 +75,8 @@ const character = {
 
 //function describes monster actions logic
 //return the object (one of the action list with max damage and zero coooldown)
-const hit = obj => {	
-	//choose the move with max damage (physical or magic)
-	const action = arr => {
+//choose the move with max damage (physical or magic)
+	const hit = arr => {
 		const len = arr.length;
 		let dmg = 0, index = 0;
 		for (let i = 0; i < len; i++) {
@@ -99,12 +99,13 @@ const hit = obj => {
 		}		
 		arr[index].currCD = arr[index].CD;		
 		return arr[index];        
-	}	
-	return action(obj.moves);	
-};
+	};
 
 //function below calculates the applied damage
 const diff = (minuend, subtrahend) => {
+	if ((typeof(minuend) !== "object") || (typeof(subtrahend) !== "object")) {		
+		return 0;
+	}
     const physDmg = subtrahend.physicalDmg - (minuend.physicArmorPercent / 100 * subtrahend.physicalDmg);
     const magDmg = subtrahend.magicDmg - (minuend.magicArmorPercent / 100 * subtrahend.magicDmg);
     return physDmg + magDmg;
@@ -124,16 +125,23 @@ while (true) {
     console.log(`health of ${monster.name}: ${monster.currentHealth}`);
     console.log(`health of ${character.name}: ${character.currentHealth}`);
 
+
     //input accept the index of obj.moves
-    const playerAction = readline.question('what do we do?')
+	console.table(character.moves);
+    const playerInput = readline.question('what do we do?')
 
     //calculate the damage of opponents
-    const mdm = hit(monster);
-    const cdm = hit(character);
+    const mdm = hit(monster.moves);
+    const cdm = character.moves[+playerInput];
 
-    console.log(`${monster.name} applies the ${mdm.name} and apply ${mdm.physicalDmg + mdm.magicDmg} damage`);
-    console.log(`${character.name} applies the ${cdm.name} and apply ${cdm.physicalDmg + cdm.magicDmg} damage`);
-
-    monster.currentHealth -= diff(mdm, cdm);
+	if ((diff(mdm, cdm) === 0) || diff(cdm, mdm) === 0) {
+		console.log("incorrect input data");
+		continue;
+	}
+	monster.currentHealth -= diff(mdm, cdm);
     character.currentHealth -=diff(cdm, mdm);
+
+    console.log(`${monster.name} applies the ${mdm.name} and give ${mdm.physicalDmg + mdm.magicDmg} damage`);
+    console.log(`${character.name} applies the ${cdm.name} and give ${cdm.physicalDmg + cdm.magicDmg} damage`);    
+		
 };
