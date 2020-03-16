@@ -11,3 +11,11 @@ For example: computer the generate number 1836, on first attempt you input 6815,
 >1 bulls, 2 cows
 
 it means that 1 digit in your number is right and standing on their place (digit 8), and two digits is right, but standing on wrong places (digits 6 and 1).
+
+### 2.RPG battle
+Fantasy-style text game in console.
+
+Actually includes only the batlle between your character and monster. You have a set of actions that you can use against the computer.
+Computer has set moves too, but also has very primitive logic. Kill the monster and don't let yourself be killed. It is possible to change the difficulty. 
+
+in proccess
