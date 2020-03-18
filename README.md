@@ -1,6 +1,7 @@
 ﻿# mindgames_console
 
-It's a beginner's pet-project includes some small console logic games.
+It's a beginner's pet-project includes some small logic games.
+Node.js is required to launch apps.
 ***
 ### 1.Bulls and cows
 A simple logic game popular among students and school children.
