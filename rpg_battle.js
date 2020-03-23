@@ -111,6 +111,23 @@ const diff = (minuend, subtrahend) => {
     return Math.round(physDmg + magDmg);
 };
 
+console.log("Welcome to minimalist RPG! In this script there are only battle between monster and player.");
+console.log("Choose the difficulty (affect on the max HP of monster)");
+
+while (true) {
+    const chooseDifficulty = readline.question("easy / normal / hard");
+    if (chooseDifficulty === "easy") {
+        monster.maxHealth = monster.currentHealth = 15;
+        break;
+    } if (chooseDifficulty === "normal") {
+        monster.maxHealth = monster.currentHealth = 30;
+        break;
+    } if (chooseDifficulty === "hard") {
+        monster.maxHealth = monster.currentHealth = 45;
+        break;
+    }
+};
+
 console.table(monster.moves);
 while (true) {
 	if ((monster.currentHealth <= 0) && (character.currentHealth <= 0)) {
