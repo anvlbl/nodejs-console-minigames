@@ -111,6 +111,8 @@ const diff = (minuend, subtrahend) => {
     return Math.round(physDmg + magDmg);
 };
 
+
+// BATTLE BEGINS!!!
 console.log("Welcome to minimalist RPG! In this script there are only battle between monster and player.");
 console.log("Choose the difficulty (affect on the max HP of monster)");
 
@@ -131,7 +133,8 @@ while (true) {
 console.table(monster.moves);
 while (true) {
 	if ((monster.currentHealth <= 0) && (character.currentHealth <= 0)) {
-		console.log();
+        console.log('draw! friendship is won!');
+        break;
 	}
 	if (monster.currentHealth <= 0) {
 		console.log('you won!');
