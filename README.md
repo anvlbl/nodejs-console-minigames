@@ -19,4 +19,6 @@ Fantasy-style text game in console.
 Actually includes only the batlle between your character and monster. You have a set of actions that you can use against the computer.
 Computer has set moves too, but also has very primitive logic. Kill the monster and don't let yourself be killed. It is possible to change the difficulty. 
 
-in proccess
+### 3. The quiz
+
+The project's folder contains the files with the questions and variants of answers. In this case quiz theme - Tolkien's creativity. Start from index.js script choose some files from main folder, print the question to console and considers the correct answers.
