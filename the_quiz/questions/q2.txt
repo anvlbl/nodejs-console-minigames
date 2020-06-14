@@ -1,0 +1,7 @@
+How name of First Enemy?
+3
+1. Smaug
+2. Azog
+3. Melkor
+4. Balrog
+5. Sauron
