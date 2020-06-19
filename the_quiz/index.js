@@ -1,15 +1,29 @@
 const fs = require('fs');
-const readLine = require('readline-sync');
-  
-const data = fs.readFileSync('questions/fook.txt', 'utf8');
-const line = data.split('\n')[0];
-const right = +data.split('\n')[1];
-console.log(line.toString());
-console.log(data.split('\n').slice(1));
+const readline = require('readline-sync');
+const handler = require('./handler');
 
-const query = +readLine.question('input the variant ');
+//get the full collection of questions in our quiz
+const questionCollection = fs.readdirSync('questions');
 
-if (query === right) {
-  console.log('Is correct answer!');
-}
-else console.log('hooy');
+let list = [];
+
+while (list.length < 5) {
+  const randomFile = Math.floor(Math.random() * questionCollection.length - 1) + 1;
+  if (list.includes(questionCollection[randomFile])) {
+    continue;
+  }
+  list.push(questionCollection[randomFile]);
+};
+
+console.log(list);
+
+let corrects = 0; //counter of correct answers
+
+//quiz loop
+for (const every of list) {
+  handler.questionFile(every);
+  const query = readline.question('input the index of correct answer: ');
+  corrects += handler.checkTheCorrect(every, query);
+};
+
+console.log(`the end. Quantity of correct answers: ${corrects}`);
