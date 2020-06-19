@@ -21,4 +21,4 @@ Computer has set moves too, but also has very primitive logic. Kill the monster 
 
 ### 3. The quiz
 
-The project's folder contains the files with the questions and variants of answers. In this case quiz theme - Tolkien's creativity. Start from index.js script choose some files from main folder, print the question to console and considers the correct answers.
+The project's folder contains the files with the questions and variants of answers. In this case quiz theme - Tolkien's creativity. Start from index.js script choose 5 files from main folder, print the question to console and considers the correct answers. Use the node modules and Node fs API.
